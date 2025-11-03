@@ -1,0 +1,110 @@
+<!-- <h2 class="form-title">Student List</h2>
+<table class="student-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Age</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let student of students">
+      <td *ngIf="!student.editing">{{ student.name }}</td>
+      <td *ngIf="student.editing">
+        <input [(ngModel)]="student.name" />
+      </td>
+
+      <td *ngIf="!student.editing">{{ student.email }}</td>
+      <td *ngIf="student.editing">
+        <input [(ngModel)]="student.email" />
+      </td>
+
+      <td *ngIf="!student.editing">{{ student.age }}</td>
+      <td *ngIf="student.editing">
+        <input type="number" [(ngModel)]="student.age" />
+      </td>
+
+      <td>
+        <button *ngIf="!student.editing" (click)="editStudent(student)">Edit</button>
+        <button *ngIf="student.editing" (click)="updateStudent(student)">Save</button>
+        <button (click)="deleteStudent(student.id!)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table> -->
+
+
+<h2 class="form-title text-center my-4">Student List</h2>
+<table class="table table-striped table-bordered">
+  <thead class="table-dark">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Age</th>
+      <th class="text-center">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let student of students">
+      <td>{{ student.name }}</td>
+      <td>{{ student.email }}</td>
+      <td>{{ student.age }}</td>
+      <td class="text-center">
+        <button class="btn btn-sm btn-primary me-2" (click)="openEditModal(student)">Edit</button>
+        <button class="btn btn-sm btn-danger" (click)="openDeleteModal(student)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Edit Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form (ngSubmit)="updateStudent(selectedStudent)">
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Student</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mb-3">
+            <label>Name</label>
+            <input class="form-control" [(ngModel)]="selectedStudent.name" name="name" required />
+          </div>
+          <div class="mb-3">
+            <label>Email</label>
+            <input class="form-control" [(ngModel)]="selectedStudent.email" name="email" required />
+          </div>
+          <div class="mb-3">
+            <label>Age</label>
+            <input type="number" class="form-control" [(ngModel)]="selectedStudent.age" name="age" required />
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success">Save</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Confirm Delete</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to delete <strong>{{ selectedStudent?.name }}</strong>?
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-danger" (click)="deleteStudent(selectedStudent.id!)">Delete</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

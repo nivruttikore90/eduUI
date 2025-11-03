@@ -1,0 +1,40 @@
+<!-- <h2>Register Student</h2>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <label>Name</label>
+  <input formControlName="name" />
+  <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched">Required</div>
+
+  <label>Email</label>
+  <input formControlName="email" />
+  <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched">Valid email required</div>
+
+  <label>Age</label>
+  <input formControlName="age" type="number" />
+  <div *ngIf="form.get('age')?.invalid && form.get('age')?.touched">Required</div>
+
+  <button type="submit" [disabled]="form.invalid">Register</button>
+</form> -->
+
+
+<h2 class="form-title">Register Student</h2>
+<form [formGroup]="form" (ngSubmit)="submit()" class="form-container">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input id="name" formControlName="name" class="form-control" />
+    <div class="error" *ngIf="form.get('name')?.invalid && form.get('name')?.touched">Name is required</div>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input id="email" formControlName="email" class="form-control" />
+    <div class="error" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">Valid email required</div>
+  </div>
+
+  <div class="form-group">
+    <label for="age">Age</label>
+    <input id="age" formControlName="age" type="number" class="form-control" />
+    <div class="error" *ngIf="form.get('age')?.invalid && form.get('age')?.touched">Age is required</div>
+  </div>
+
+  <button type="submit" [disabled]="form.invalid" class="submit-btn">Register</button>
+</form>
